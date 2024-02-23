@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-
+const formatDate = require("../utils/date")
 const courseSchema = new Schema(
   {
     email: {
@@ -13,6 +13,7 @@ const courseSchema = new Schema(
     startDate: {
       type: Date,
       default: Date.now(),
+      get: timestamp => formatDate(timestamp)
     },
     endDate: {
       type: Date,
@@ -27,7 +28,8 @@ const courseSchema = new Schema(
   },
   {
     toJSON: {
-      virtuals: true
+      virtuals: true,
+      getters: true
     },
     id: false,
   }
