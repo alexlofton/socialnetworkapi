@@ -70,25 +70,25 @@ res.status(500).json(err);
 }
 },
 
-// add to "friends" array in user model
-async addFriend(req, res) {
+// add to "reactions" array in user model
+async addReaction(req, res) {
 try {
-const dbUserData = await User.findOneAndUpdate({ _id: req.params.userId }, { $push: { friends: req.params.friendId } }, { new: true });
+const thoughtData = await Thought.findOneAndUpdate({ _id: req.params.thoughtId }, { $push: { reactions: req.body } }, { new: true });
 
 
-res.json(dbUserData);
+res.json(thoughtData);
 } catch (err) {
 console.log(err);
 res.status(500).json(err);
 }
 },
 // remove friend from friend list
-async removeFriend(req, res) {
+async removeReaction(req, res) {
 try {
-const dbUserData = await User.findOneAndUpdate({ _id: req.params.userId }, { $pull: { friends: req.params.friendId } }, { new: true });
+const thoughtData= await Thought.findOneAndUpdate({ _id: req.params.thoughtId }, { $pull: { reactions: {reactionId: req.params.reactionId }} }, { new: true });
 
 
-res.json(dbUserData);
+res.json(thoughtDataData);
 } catch (err) {
 console.log(err);
 res.status(500).json(err);
@@ -96,4 +96,4 @@ res.status(500).json(err);
 },
 };
 
-module.exports = userController;
+module.exports = thoughtController;
