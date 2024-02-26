@@ -88,7 +88,7 @@ try {
 const thoughtData= await Thought.findOneAndUpdate({ _id: req.params.thoughtId }, { $pull: { reactions: {reactionId: req.params.reactionId }} }, { new: true });
 
 
-res.json(thoughtDataData);
+res.json(thoughtData);
 } catch (err) {
 console.log(err);
 res.status(500).json(err);
